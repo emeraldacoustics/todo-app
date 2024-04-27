@@ -1,0 +1,32 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "A simple web app that allows users to manage their own todo list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexmcmahonsoftware/todo-app.git"
+  },
+  "keywords": [
+    "mern",
+    "mongodb",
+    "express.js",
+    "react",
+    "node.js",
+    "redux"
+  ],
+  "author": "Alex McMahon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexmcmahonsoftware/todo-app/issues"
+  },
+  "homepage": "https://github.com/alexmcmahonsoftware/todo-app#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2"
+  }
+}
