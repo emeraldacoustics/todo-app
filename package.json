@@ -4,7 +4,9 @@
   "description": "A simple web app that allows users to manage their own todo list.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "nodemon backend/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server.js",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server.js"
   },
   "repository": {
     "type": "git",
@@ -25,8 +27,18 @@
   },
   "homepage": "https://github.com/alexmcmahonsoftware/todo-app#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongoose": "^8.3.2"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.2",
+    "nodemailer": "^6.9.13",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
