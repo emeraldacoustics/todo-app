@@ -1,16 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import axios from 'axios';
 import './App.css';
 
-import store from './app/store';
+// import store from './app/store';
 
 import Home from './components/home';
 import Login from './components/login';
 import Register from './components/register';
 
+// axios.defaults.withCredentials = true;
+
 function App() {
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
       <BrowserRouter>
         <div className="App">
           <main>
@@ -22,7 +25,7 @@ function App() {
           </main>
         </div>
       </BrowserRouter>
-    </Provider>
+    // </Provider>
   );
 }
 

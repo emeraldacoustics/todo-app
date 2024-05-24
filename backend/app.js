@@ -9,9 +9,13 @@ const todoList = require('./routes/todolist');
 const auth = require('./routes/auth.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use(cors("*"));
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
+// app.use(cors('*'));
 app.use('/api/v1', todoList);
 app.use('/api/v1', auth);
 
