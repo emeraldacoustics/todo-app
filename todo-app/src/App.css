@@ -1,5 +1,17 @@
+body {
+  background-color: hsl(0, 0%, 11%);
+}
+
 .App {
   /* text-align: center; */
+	display: flex;
+	color: hsl(0, 0%, 100%);
+  width: 100vw;
+}
+
+main
+{
+	width: inherit;
 }
 
 .App-logo {

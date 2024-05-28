@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const todoListSchema = new mongoose.Schema({
+    done: {
+        type: Boolean,
+        required: [true, 'Please enter if done'],
+    },
     title: {
         type: String,
         required: [true, 'Please enter title.'],

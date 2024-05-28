@@ -12,7 +12,9 @@ exports.getTodoList = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.postTodoList = catchAsyncErrors(async (req, res, next) => {
+    console.log(req.body);
     result = await TodoList.create({
+        done: req.body.done,
         title: req.body.title,
         note: req.body.note,
         user: req.user._id
@@ -27,6 +29,7 @@ exports.putTodoList = catchAsyncErrors(async (req, res, next) => {
     result = await TodoList.updateOne({
         _id: req.body._id, user: req.user._id
     }, {
+        done: req.body.done,
         title: req.body.title,
         note: req.body.note
     });

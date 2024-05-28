@@ -1,0 +1,105 @@
+.todo-item
+{
+	display: flex;
+	align-items: center;
+	/* justify-content: space-between; */
+	background-color: hsl(0, 0%, 16%);
+    padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+    margin: 1rem;
+	border-style: none;
+    border-radius: 0.25rem;
+	min-height: 2rem;
+}
+
+.todo-item .done
+{
+	text-align: center;
+	padding: auto;
+	box-sizing: content-box;
+	width: 2rem;
+}
+
+.todo-item .title-note-group
+{
+	width: 100%;
+	display: flex;
+}
+
+.todo-item .title
+{
+	color: hsl(0, 0%, 100%);
+	width: 40%;
+	font-size: 1em;
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding-right: 1rem;
+	overflow-x: hidden;
+	vertical-align: middle;
+}
+
+.todo-item .title input
+{
+	color: hsl(0, 0%, 100%);
+	font-size: 1em;
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: hsl(0, 0%, 11%);
+	border-style: none;
+	width: -webkit-fill-available;
+}
+
+.todo-item .note
+{
+	color: hsl(0, 0%, 100%);
+	font-size: 1em;
+	width: 60%;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding-right: 1rem;
+	overflow-x: hidden;
+}
+
+.todo-item .note input
+{
+	color: hsl(0, 0%, 100%);
+	font-size: 1em;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: hsl(0, 0%, 11%);
+	border-style: none;
+	width: -webkit-fill-available;
+}
+
+.todo-item .btn-group
+{
+	display: flex;
+	width: 6rem;
+	align-items: right;
+	justify-content: center;
+}
+
+button.mini-button
+{
+	color: hsl(0, 0%, 100%);
+	font-size: 0.75em;
+	/* font-family: Ubuntu, sans-serif; */
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: hsl(216, 100%, 50%);
+	border-radius: 0.25em;
+	border: 1px hsl(0, 0%, 80%);
+	padding: 0.25em;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+}
+
+button.mini-button:hover
+{
+	background-color: hsl(216, 100%, 40%);
+}
+
+button.mini-button:active
+{
+	background-color: hsl(216, 100%, 30%);
+}
+

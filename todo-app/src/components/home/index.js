@@ -60,12 +60,13 @@ function Home() {
   }
 
   function onSaveClick(_id, item) {
+    console.log("save: ");
+    console.log(item);
     setSelected(null);
     if (adding) {
       setAdding(false);
       axios.post(`${backend_url}/api/v1/todolist`, {
-        title: item.title,
-        note: item.note
+        ...item
       }, { withCredentials: true })
       .then(res => {
         if (res.data.success) {
@@ -74,13 +75,11 @@ function Home() {
       })
     } else {
       axios.put(`${backend_url}/api/v1/todolist`, {
-        _id,
-        title: item.title,
-        note: item.note
+        ...item
       }, { withCredentials: true })
       .then(res => {
         if (res.data.success) {
-          setTodoList(todoList.map(itm => itm._id === _id ? {...itm, title: item.title, note: item.note} : itm));
+          setTodoList(todoList.map(itm => itm._id === _id ? item : itm));
         }
       })
     }
@@ -107,20 +106,6 @@ function Home() {
   });
   return (
     <>
-      {
-        adding ?
-          <TodoItem
-            key=''
-            item={{_id: '', title: '', note: ''}}
-            selected={selected}
-            onEditClick={onEditClick}
-            onDeleteClick={onDeleteClick}
-            onSaveClick={onSaveClick}
-            onCancelClick={onCancelClick}
-          />
-        :
-          <button onClick={onAddClick}>Add</button>
-      }
       <button
         onClick={e => {
           e.preventDefault();
@@ -133,9 +118,23 @@ function Home() {
           logout();
         }}
       >Logout</button>
-      <ul>
-        {list}
-      </ul>
+      
+      {
+        adding ?
+          <TodoItem
+            key=''
+            item={{_id: '', done: false, title: '', note: ''}}
+            selected={selected}
+            onEditClick={onEditClick}
+            onDeleteClick={onDeleteClick}
+            onSaveClick={onSaveClick}
+            onCancelClick={onCancelClick}
+          />
+        :
+          <button onClick={onAddClick}>Add</button>
+      }
+
+      {list}
     </>
   );
 }
