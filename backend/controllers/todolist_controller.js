@@ -3,16 +3,18 @@ const TodoList = require('../models/todolist');
 const catchAsyncErrors = require('../middlewares/catch_async_errors');
 
 exports.getTodoList = catchAsyncErrors(async (req, res, next) => {
-    result = await TodoList.find({ user: req.user._id });
-    console.log(result);
+    // result = await TodoList.find({ user: req.user._id });
+    const itemCount = await TodoList.find({ user: req.user._id }).countDocuments();
+    const result = await TodoList.find({ user: req.user._id }).skip(req.query.curPage * req.query.resPerPage).limit(req.query.resPerPage);
+    console.log(req.query);
     res.status(200).json({
         success: true,
-        result
+        result,
+        itemCount
     });
 });
 
 exports.postTodoList = catchAsyncErrors(async (req, res, next) => {
-    console.log(req.body);
     result = await TodoList.create({
         done: req.body.done,
         title: req.body.title,

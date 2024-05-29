@@ -1,18 +1,26 @@
+import './index.css';
 import { useEffect, useState } from "react";
 import TodoItem from './todo-item';
 import axios from 'axios';
 
 function Home() {
-  const [todoList, setTodoList] = useState([]);
+  const [result, setResult] = useState([]);
   const [selected, setSelected] = useState(null);
   const [adding, setAdding] = useState(false);
+  const [curPage, setCurPage] = useState(0);
+  const [resPerPage, setResPerPage] = useState(5);
+  const [itemCount, setItemCount] = useState(0);
+  const pageCount = Math.max(1, Math.floor((itemCount + resPerPage - 1) / resPerPage));
 
   const backend_url = process.env.REACT_APP_BACKEND_URL;
 
-  function reload() {
-    axios.get(`${backend_url}/api/v1/todolist`, { withCredentials: true })
+  function reload(curPageParam = curPage, resPerPageParam = resPerPage) {
+    axios.get(`${backend_url}/api/v1/todolist?curPage=${curPageParam}&resPerPage=${resPerPageParam}`, {
+      withCredentials: true
+    })
     .then(res => {
-      setTodoList(res.data.result);
+      setResult(res.data.result);
+      setItemCount(res.data.itemCount);
     }).catch(error => {
       console.error(error);
       window.location = "/login";
@@ -51,9 +59,10 @@ function Home() {
       withCredentials: true,
       data: { _id }
     }).then(res => {
-      if (res.data.success === true) {
-        setTodoList(todoList.filter(item => item._id !== _id));
-      }
+      // if (res.data.success === true) {
+      //   setResult(result.filter(item => item._id !== _id));
+      // }
+      reload();
     }).catch(error => {
       console.log(error);
     })
@@ -69,9 +78,10 @@ function Home() {
         ...item
       }, { withCredentials: true })
       .then(res => {
-        if (res.data.success) {
-          setTodoList([res.data.result, ...todoList]);
-        }
+        // if (res.data.success) {
+        //   setResult([res.data.result, ...result]);
+        // }
+        reload();
       })
     } else {
       axios.put(`${backend_url}/api/v1/todolist`, {
@@ -79,7 +89,7 @@ function Home() {
       }, { withCredentials: true })
       .then(res => {
         if (res.data.success) {
-          setTodoList(todoList.map(itm => itm._id === _id ? item : itm));
+          setResult(result.map(itm => itm._id === _id ? item : itm));
         }
       })
     }
@@ -91,7 +101,7 @@ function Home() {
     setSelected(null);
   }
 
-  const list = todoList.map(item => {
+  const list = result.map(item => {
     return (
       <TodoItem
         key={item._id}
@@ -135,6 +145,38 @@ function Home() {
       }
 
       {list}
+
+      <div className="page-controller">
+        <button
+          onClick={e => {
+            e.preventDefault();
+            if (curPage > 0) {
+              setCurPage(e => e - 1);
+              reload(curPage - 1, resPerPage);
+            }
+          }}
+        >{'<'}</button>
+        {curPage + 1} / {pageCount}
+        <button
+          onClick={e => {
+            e.preventDefault();
+            if (curPage + 1 < pageCount) {
+              setCurPage(e => e + 1);
+              reload(curPage + 1, resPerPage);
+            }
+          }}
+        >{'>'}</button>
+        <select
+          onChange={e => {
+            setResPerPage(+e.target.value);
+            reload(curPage, +e.target.value);
+          }}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+        </select>
+      </div>
     </>
   );
 }
